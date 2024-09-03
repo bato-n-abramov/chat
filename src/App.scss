@@ -1,0 +1,22 @@
+@import './styles/variables';
+
+
+.App {
+  background-color: $black-color;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  padding: 15px;
+}
+
+
+.layout {
+  display: flex;
+  height: calc(100% - 30px);
+}
+
+main {
+  flex: 1 1 0%;
+}

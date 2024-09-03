@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $bg-color;
+    border-radius: 20px;
+    padding: 20px;
+}

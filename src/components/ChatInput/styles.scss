@@ -1,0 +1,44 @@
+@import '../../styles/variables';
+
+.chatInput {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-top: auto;
+    width: 100%;
+    max-width: 740px;
+
+    &-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $add-bg-color;
+        border-radius: 24px;
+        padding: 10px;
+    }
+
+    &-form {
+        flex: 1;
+        position: relative;
+    }
+
+    &-btn {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &-web {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .SeparatorRoot[data-orientation='vertical'] {
+        height: 100%;
+        width: 1px;
+        background-color: #404040;
+      }
+}

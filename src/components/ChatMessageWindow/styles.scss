@@ -1,0 +1,8 @@
+.ChatMessageWindow {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 930px;
+    gap: 32px;
+}

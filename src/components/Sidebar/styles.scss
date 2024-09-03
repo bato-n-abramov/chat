@@ -1,0 +1,25 @@
+@import '../../styles/variables';
+
+.sidebar {
+    overflow: hidden;
+    padding: 20px 12px;
+    background-color: $black-color;
+    color: #fff;
+    height: 100%; 
+    transition: 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+
+    &-wrapper {
+        width: 270px;
+    }
+
+    &-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-content {
+    }
+}
+
+  

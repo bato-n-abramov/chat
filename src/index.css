@@ -1,0 +1,24 @@
+@import "./reset.css";
+@import "./fonts/stylesheet.css";
+
+html,
+body {
+  height: 100%;
+}
+
+body.light {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+body.dark {
+  --background-color: #000000;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Inter', sans-serif;
+}
