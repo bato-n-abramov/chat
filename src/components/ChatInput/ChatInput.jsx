@@ -8,20 +8,26 @@ import "./styles.scss";
 export default function ChatInput({
   disabledTextArea = false,
   disabledSendMessage = false,
-  stopMessageGeneration = () => {},
   onSendMessage,
+  onAttachImage,
 }) {
   const [userPrompt, setUserPrompt] = useState("");
   const [websearch, setWebsearch] = useState(false);
+  const [attachedFiles, setAttachedFiles] = useState([]);
   const textareaRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   async function sendMessage(event) {
     event.preventDefault();
-    if (!userPrompt) {
+    if (!userPrompt && attachedFiles.length === 0) {
       return;
     }
-    onSendMessage(userPrompt);
+
+    if (onSendMessage) {
+      onSendMessage(userPrompt, attachedFiles);
+    }
     setUserPrompt("");
+    setAttachedFiles([]);
   }
 
   function handleKeydown(event) {
@@ -43,6 +49,28 @@ export default function ChatInput({
     }
   }
 
+  function handleAttachClick() {
+    fileInputRef.current.click(); 
+  }
+
+  function handleFileChange(event) {
+    const files = Array.from(event.target.files);
+    if (files.length > 0) {
+      
+      setAttachedFiles((prevFiles) => [...prevFiles, ...files]);
+      if (onAttachImage) {
+        onAttachImage(files);
+      }
+    }
+  }
+
+  function handleRemoveFile(index) {
+    setAttachedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  }
+
+  const isSendButtonDisabled = !userPrompt && attachedFiles.length === 0 || disabledSendMessage;
+
+
   return (
     <div className="chatInput">
       <div className="chatInput-wrapper">
@@ -53,9 +81,6 @@ export default function ChatInput({
             checked={websearch}
             onCheckedChange={() => setWebsearch((value) => !value)}
           />
-          {disabledTextArea && (
-            <button onClick={stopMessageGeneration} className=""></button>
-          )}
         </div>
         <Separator.Root
           className="SeparatorRoot"
@@ -75,10 +100,40 @@ export default function ChatInput({
               setUserPrompt(e.target.value);
             }}
           />
+          <Button type="button" onClick={handleAttachClick}>
+              Attach
+          </Button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+            multiple 
+          />
+          <div className="chatInput-files">
+            {attachedFiles.map((file, index) => (
+              <div key={index} className="chatInput-file">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt={`Attached file ${index + 1}`}
+                  className="chatInput-file-preview"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  className="chatInput-file-remove"
+                  onClick={() => handleRemoveFile(index)}
+                >
+                  x
+                </Button>
+              </div>
+            ))}
+          </div>
           <div className="chatInput-btn">
             <Button
               type="submit"
-              disabled={!userPrompt || disabledSendMessage}
+              disabled={isSendButtonDisabled}
             >
               Send
             </Button>

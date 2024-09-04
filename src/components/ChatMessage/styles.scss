@@ -12,17 +12,78 @@
   background-color: #37383C;
   padding: 20px;
   border-radius: 20px;
+  width: 100%;
   max-width: 70%;
   margin-left: auto;
+}
+
+.chat-message-user {
+  display: flex;
+  flex-direction: column;
+
+  .chat-message-images {
+    display: flex;
+    gap: 10px;
+    order: 2;
+    border-top: 1px solid #404040;
+    padding-top: 20px;
+
+    .chat-message-image {
+        width: 100%;
+        max-width: 120px;
+    }
+  }
 }
 
 .chat-message-assistant {
   background-color: $add-bg-color;
   margin-right: auto;
   margin-left: unset;
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  img {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .assistant-images-wrapper {
+    display: flex;
+    padding-top: 20px;
+    border-top: 1px solid #404040;
+    gap: 10px;
+
+    .assistant-image {
+      position: relative;
+
+      &:hover {
+        .assistant-image-download {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      &-download {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
 }
 
-.chat-message-image {
+.chat-message-avatar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,4 +167,82 @@
       font-weight: 400;
     }
   }
+
+  .code-wrapper {
+    background-color: #242628;
+    border-radius: 12px;
+    padding: 16px;
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #404040;
+    }
+
+    .my-0 {
+      background-color: unset !important;
+    }
+  }
+}
+
+
+.DialogContent {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .assistant-image {
+    position: relative;
+
+    img {
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    &:hover {
+      .assistant-image-download {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &-download {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+.dialog-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background-color: #37383C;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.DialogOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(8, 8, 8, 0.8);
 }

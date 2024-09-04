@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import Intro from '../Intro/Intro';
 import ChatInput from '../ChatInput/ChatInput';
 import ChatMessageWindow from '../ChatMessageWindow/ChatMessageWindow';
+import Header from '../Header/Header';
 import './styles.scss';
 
-const Main = ({ isSidebarOpen, isNewChat, setIsNewChat }) => {
+const Main = ({ isSidebarOpen, isNewChat }) => {
+  const { cId } = useParams(); 
   const [messages, setMessages] = useState([]);
   const [messageInProgress, setMessageInProgress] = useState("");
+  const [hasStartedConversation, setHasStartedConversation] = useState(false);
   const [conversationId, setConversationId] = useState(null);
-  const [hasConversationStarted, setHasConversationStarted] = useState(false);
+
+  const location = useLocation();
+  const isNewChatFromState = location.state?.isNewChat;
+
 
   const markdownContent = `
   # Sample Markdown Content
@@ -63,28 +70,18 @@ const Main = ({ isSidebarOpen, isNewChat, setIsNewChat }) => {
       "Could you please clarify your question?",
       "I'm here to help, but I didn't understand that.",
     ],
-    markdown: [markdownContent] 
-  };
+    markdown: [markdownContent] ,
+    image: [
+      "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
 
-  const saveConversationMetadata = (newConversation) => {
-    const storedConversations = localStorage.getItem('conversationMetadata');
-    const conversations = storedConversations ? JSON.parse(storedConversations) : [];
-  
-    conversations.push(newConversation);
-    localStorage.setItem('conversationMetadata', JSON.stringify(conversations));
+    ]
   };
 
   const saveConversationContent = (conversationId, messages) => {
     const storedConversations = localStorage.getItem('conversations');
     const conversations = storedConversations ? JSON.parse(storedConversations) : {};
-  
     conversations[conversationId] = messages;
     localStorage.setItem('conversations', JSON.stringify(conversations));
-  };
-
-  const loadConversationMetadata = () => {
-    const storedConversations = localStorage.getItem('conversationMetadata');
-    return storedConversations ? JSON.parse(storedConversations) : [];
   };
 
   const loadConversationContent = (conversationId) => {
@@ -94,28 +91,39 @@ const Main = ({ isSidebarOpen, isNewChat, setIsNewChat }) => {
   };
 
   useEffect(() => {
-    if (isNewChat) {
+    if (cId) {
+      const existingMessages = loadConversationContent(cId);
+      setMessages(existingMessages);
+    }
+  }, [cId]);
+
+  useEffect(() => {
+    if (isNewChatFromState ||!cId) {
       setMessages([]);
+      setHasStartedConversation(false);
       setConversationId(Date.now().toString());
-      setHasConversationStarted(false);
-      setIsNewChat(false); // Reset the new chat flag
+
+    } else if (cId) {
+      const existingMessages = loadConversationContent(cId);
+      setMessages(existingMessages);
+      setConversationId(cId);
+      setHasStartedConversation(existingMessages.length > 0); 
+
     } else {
-      const metadata = loadConversationMetadata();
+      const metadata = loadConversationContent();
       if (metadata.length > 0) {
         const latestConversationId = metadata[metadata.length - 1].id;
         setMessages(loadConversationContent(latestConversationId));
         setConversationId(latestConversationId);
-        setHasConversationStarted(true);
       }
     }
-  }, [isNewChat]);
+  }, [cId, isNewChatFromState]);
 
-  const handleSendMessage = (userPrompt) => {
-    if (!hasConversationStarted) {
-      setHasConversationStarted(true);
+  const handleSendMessage = (userPrompt, attachedFiles) => {
+    if (!hasStartedConversation) {
+      setHasStartedConversation(true); 
     }
-
-    const newMessages = [...messages, { id: Date.now().toString(), content: userPrompt, userId: 'user', type: 'user' }];
+    const newMessages = [...messages, {content: userPrompt, images: attachedFiles, userId: 'user', type: 'user' }];
     let category = "default"; 
  
     if (userPrompt.toLowerCase().includes("hello")) {
@@ -124,21 +132,14 @@ const Main = ({ isSidebarOpen, isNewChat, setIsNewChat }) => {
       category = "farewell";
     } else if (userPrompt.toLowerCase().includes("markdown")) {
       category = "markdown"; 
+    } else if (userPrompt.toLowerCase().includes("image")) {
+      category = "image"; 
     }
     
     const randomResponse =
       responses[category] ? responses[category][Math.floor(Math.random() * responses[category].length)] : responses["default"];
-
-    const updatedMessages = [...newMessages, { id: Date.now().toString(), content: randomResponse, userId: 'bot', type: 'assistant' }];
+    const updatedMessages = [...newMessages, {content: randomResponse, userId: 'bot', type: 'assistant' }];
     setMessages(updatedMessages);
-
-    saveConversationMetadata({
-      id: conversationId,
-      title: `Conversation ${conversationId}`,
-      create_time: new Date().toISOString(),
-      update_time: new Date().toISOString(),
-      is_archived: false,
-    });
 
     saveConversationContent(conversationId, updatedMessages);
     setConversationId(conversationId);
@@ -148,9 +149,14 @@ const Main = ({ isSidebarOpen, isNewChat, setIsNewChat }) => {
     }, 1000);
   };
 
+  const shouldShowIntro = isNewChat || isNewChatFromState;
+
+  console.log(cId, isNewChat, isNewChatFromState, hasStartedConversation);
+
   return (
     <main className={`main-content ${isSidebarOpen ? 'shifted' : ''}`}>
-      {!hasConversationStarted && <Intro />}
+      <Header />
+      {shouldShowIntro && !hasStartedConversation && <Intro />}
       <ChatMessageWindow messages={messages} messageInProgress={messageInProgress} />
       <ChatInput onSendMessage={handleSendMessage} />
     </main>

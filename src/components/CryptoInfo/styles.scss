@@ -1,0 +1,22 @@
+.crypto-info {
+    margin-top: auto;
+    border-radius: 20px;
+    background-color: #222527;
+    padding: 20px 12px;
+    font-size: 14px;
+    font-weight: 600;
+
+    &.hidden {
+        visibility: hidden;
+    }
+
+    &-balance {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        &-value {
+            font-weight: 400;
+        }
+    }
+}
