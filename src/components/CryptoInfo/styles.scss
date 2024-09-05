@@ -19,4 +19,17 @@
             font-weight: 400;
         }
     }
+
+    .crypto-name {
+        display: flex;
+        align-items: center;
+        border-radius: 100px;
+        background-color: #0F0F10;
+        padding: 8px;
+        gap: 12px;
+
+        svg:last-child {
+            margin-left: auto;
+        }
+    }
 }

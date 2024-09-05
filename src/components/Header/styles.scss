@@ -25,13 +25,45 @@
         height: 48px;
         border-radius: 16px;
         background-color: $add-bg-color;
+        cursor: pointer;
     }
 
     &-dropdown {
+        border-radius: 14px;
+        background-color: $add-bg-color;
+        padding: 4px;
+
+
+        .btn-soft {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            & > svg {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    .dropdown-avatar {
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: #222427;
+    }
+
+    &-new-chat {
+        gap: 8px;
+        padding: 8px 16px;
         border-radius: 14px;
-        background-color: $add-bg-color;
+
+        &.btn {
+            background-color: $green-color;
+            color: #151617;
+        }
     }
 }

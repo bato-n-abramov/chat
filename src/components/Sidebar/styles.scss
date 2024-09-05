@@ -9,6 +9,10 @@
     transition: 0.3s ease;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
 
+    &-close {
+        background-color: transparent;
+    }
+
     &-wrapper {
         display: flex;
         flex-direction: column;
@@ -26,19 +30,31 @@
     }
 
     .conversation-date-label {
-        padding: 12px 15px;
+        padding: 12px 0;
         font-size: 12px;
         color: #a3a3a3;
     }
 
     .conversation-item {
         display: flex;
-        justify-content: space-between;
-        padding: 12px 15px;
+        padding: 12px;
         font-size: 14px;
         white-space: nowrap;
+        align-items: center;
         overflow: hidden;
         text-overflow: ellipsis;
+        gap: 10px;
+        min-height: 48px;
+
+        svg {
+            opacity: 0;
+            width: 0;
+            display: none;
+        }
+
+        button {
+            margin-left: auto;
+        }
 
         & > div {
             background-color: #222527;
@@ -56,13 +72,27 @@
             border-radius: 10px;
             background-color: #222527;
 
-            button {
+            button,
+            svg {
                 opacity: 1;
+                width: max-content;
+                display: block;
             }
         }
 
         button {
             opacity: 0;
+        }
+    }
+
+    &-new-chat {
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 14px;
+
+        &.btn {
+            background-color: $green-color;
+            color: #151617;
         }
     }
 }

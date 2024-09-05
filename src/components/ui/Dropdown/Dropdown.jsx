@@ -1,12 +1,17 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import  Button  from '../Button/Button';
-
+import Avatar from '../Icons/Avatar';
+import Arrow from '../Icons/Arrow';
 const Dropdown = () => {
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger>
                 <Button variant="soft">
-                    Options
+                    <div className='dropdown-avatar'>
+                        <Avatar />
+                    </div>
+                    <span>0x56e...B6</span>
+                    <Arrow />
                 </Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>

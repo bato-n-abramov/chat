@@ -4,12 +4,20 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import * as Dialog from '@radix-ui/react-dialog';
-
+import AssistantAvatar from "../ui/Icons/AssistantAvatar";
+import Edit from "../ui/Icons/Edit";
 import Button from '../ui/Button/Button';
+import Video from "../ui/Video/Video";
+import Download from "../ui/Icons/Download";
+import Like from "../ui/Icons/Like";
+import Dislike from "../ui/Icons/Dislike";
+
 import './styles.scss';
+
 
 function ChatMessage({ message }) {
   const [imageUrls, setImageUrls] = useState([]);
+ 
 
   useEffect(() => {
     if (message.images) {
@@ -33,149 +41,172 @@ function ChatMessage({ message }) {
     }
   }, [message.images]);
 
-  const className = `chat-message ${message.type === 'assistant' ? 'chat-message-assistant' : 'chat-message-user'}`;
   return (
     <div className="chat-message-wrappper">
       {message.type === 'assistant' ? (
-        <div className="chat-message-avatar"></div>
-      ) : ''}
-      <div className={className}>
-      {imageUrls.length > 0 && (
-          <div className="chat-message-images">
-            {imageUrls.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`Attachment ${index + 1}`}
-                className="chat-message-image"
-              />
-            ))}
-          </div>
-        )}
-        {message.content && (
-          <Markdown
-            remarkPlugins={[remarkGfm]}
-            className="chat-message-markdown"
-            components={{
-              code({ node, inline, className, children, ...props }) {
-                const match = /language-(\w+)/.exec(className || '');
-                const language = match ? match[1] : 'markdown';
-
-                function copyToClipboard() {
-                  navigator.clipboard.writeText(String(children));
-                }
-
-                return (
-                  <div className="code-wrapper">
-                    <div className='code-header'>
-                      <div className="code-lang">
-                        {language}
-                      </div>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className=""
-                        onClick={copyToClipboard}
-                      >
-                        Copy Code
-                      </Button>
+        <div>
+               <div className="chat-message-avatar">
+                  <AssistantAvatar />
+              </div>
+              <div className=' chat-message chat-message-assistant'>
+                {imageUrls.length > 0 && (
+                    <div className="chat-message-images">
+                      {imageUrls.map((img, index) => (
+                        <img
+                          key={index}
+                          src={img}
+                          alt={`Attachment ${index + 1}`}
+                          className="chat-message-image"
+                        />
+                      ))}
                     </div>
-                    <SyntaxHighlighter
-                      language={language}
-                      style={oneDark}
-                      PreTag="div"
-                      className="my-0"
-                      customStyle={{
-                        margin: 0,
-                        borderRadius: '0 0 0.3em 0.3em',
+                  )}
+                  {message.content && (
+                    <Markdown
+                      remarkPlugins={[remarkGfm]}
+                      className="chat-message-markdown"
+                      components={{
+                        code({ node, inline, className, children, ...props }) {
+                          const match = /language-(\w+)/.exec(className || '');
+                          const language = match ? match[1] : 'markdown';
+        
+                          function copyToClipboard() {
+                            navigator.clipboard.writeText(String(children));
+                          }
+        
+                          return (
+                            <div className="code-wrapper">
+                              <div className='code-header'>
+                                <div className="code-lang">
+                                  {language}
+                                </div>
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  className=""
+                                  onClick={copyToClipboard}
+                                >
+                                  Copy Code
+                                </Button>
+                              </div>
+                              <SyntaxHighlighter
+                                language={language}
+                                style={oneDark}
+                                PreTag="div"
+                                className="my-0"
+                                customStyle={{
+                                  margin: 0,
+                                  borderRadius: '0 0 0.3em 0.3em',
+                                }}
+                              >
+                                {String(children).replace(/\n$/, '')}
+                              </SyntaxHighlighter>
+                            </div>
+                          );
+                        },
+                        a({ href, children }) {
+                          const videoLink = href?.match(/\.(mp4|webm|ogg)$/i)?.input;
+                          if (videoLink) {
+                            return (
+                              <div className="my-4">
+                                <Video href = {href} />
+                              </div>
+                            );
+                          }
+                          const imageLink = href?.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)?.input;
+                          if (imageLink) {
+                            return (
+                              <div className="assistant-images">
+                                <p>"Here is an example image:"</p>
+                                <div className="assistant-images-wrapper">
+                                  <Dialog.Root>
+                                    <Dialog.Trigger asChild>
+                                      <div className="assistant-image">
+                                        <a href={href} className="assistant-image-download" download><Download /></a>
+                                        <img src={href} alt="Attachment" />
+                                      </div>
+                                    </Dialog.Trigger>
+                                      <Dialog.Portal>
+                                        
+                                        <Dialog.Overlay  className="DialogOverlay" />
+                                        <Dialog.Close asChild>
+                                              <button className="dialog-close" aria-label="Close">
+                                                x
+                                              </button>
+                                          </Dialog.Close>
+                                        <Dialog.Content className="DialogContent">
+                                          <div className="assistant-image">
+                                            <a href={href} className="assistant-image-download" download><Download /></a>
+                                            <img src={href} alt="Attachment" />
+                                          </div>
+                                          
+                                        </Dialog.Content>
+                                    </Dialog.Portal>
+                                  </Dialog.Root>
+                                  <Dialog.Root>
+                                    <Dialog.Trigger asChild>
+                                      <div className="assistant-image">
+                                        <a href={href} className="assistant-image-download" download><Download /></a>
+                                        <img src={href} alt="Attachment" />
+                                      </div>
+                                    </Dialog.Trigger>
+                                      <Dialog.Portal>
+                                        <Dialog.Overlay  className="DialogOverlay"  />
+                                          <Dialog.Close asChild>
+                                              <button className="dialog-close" aria-label="Close">
+                                                x
+                                              </button>
+                                          </Dialog.Close>
+                                          <Dialog.Content className="DialogContent">
+                                            <div className="assistant-image">
+                                              <a href={href} className="assistant-image-download" download><Download /></a>
+                                              <img src={href} alt="Attachment" />
+                                            </div>
+                                            
+                                          </Dialog.Content>
+                                      </Dialog.Portal>
+                                  </Dialog.Root>
+                                  
+        
+                                </div>
+                              </div>
+                            );
+                          }
+                          
+                          return <a href={href}>{children}</a>;
+                        },
                       }}
                     >
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
+                      {message.content}
+                    </Markdown>
+                  )}
+                  <div className="chat-message-assistant-buttons">
+                        <div className="chat-message-assistant-btn chat-message-assistant-copy">Copy</div>
+                        <div className="chat-message-assistant-btn chat-message-assistant-regenerate">Regenerate response</div>
+                        <div className="chat-message-assistant-btn chat-message-assistant-reactions">
+                          <Like/>
+                          <Dislike/>
+                        </div>
                   </div>
-                );
-              },
-              a({ href, children }) {
-                const videoLink = href?.match(/\.(mp4|webm|ogg)$/i)?.input;
-                if (videoLink) {
-                  return (
-                    <div className="my-4">
-                      <video controls width="100%">
-                        <source src={href} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
+              </div>
+        </div>
+      ) : <div className="chat-message-user">
+              {message.content}
+              {imageUrls.length > 0 && (
+                    <div className="chat-message-images">
+                      {imageUrls.map((img, index) => (
+                        <img
+                          key={index}
+                          src={img}
+                          alt={`Attachment ${index + 1}`}
+                          className="chat-message-image"
+                        />
+                      ))}
                     </div>
-                  );
-                }
-                const imageLink = href?.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)?.input;
-                if (imageLink) {
-                  return (
-                    <div className="assistant-images">
-                      <p>"Here is an example image:"</p>
-                      <div className="assistant-images-wrapper">
-                        <Dialog.Root>
-                          <Dialog.Trigger asChild>
-                            <div className="assistant-image">
-                              <a href={href} className="assistant-image-download" download>Dowload</a>
-                              <img src={href} alt="Attachment" />
-                            </div>
-                          </Dialog.Trigger>
-                            <Dialog.Portal>
-                               
-                              <Dialog.Overlay  className="DialogOverlay" />
-                              <Dialog.Close asChild>
-                                    <button className="dialog-close" aria-label="Close">
-                                      x
-                                    </button>
-                                </Dialog.Close>
-                              <Dialog.Content className="DialogContent">
-                                <div className="assistant-image">
-                                  <a href={href} className="assistant-image-download" download>Dowload</a>
-                                  <img src={href} alt="Attachment" />
-                                </div>
-                                
-                              </Dialog.Content>
-                          </Dialog.Portal>
-                        </Dialog.Root>
-                        <Dialog.Root>
-                          <Dialog.Trigger asChild>
-                            <div className="assistant-image">
-                              <a href={href} className="assistant-image-download" download>Dowload</a>
-                              <img src={href} alt="Attachment" />
-                            </div>
-                          </Dialog.Trigger>
-                            <Dialog.Portal>
-                              <Dialog.Overlay  className="DialogOverlay"  />
-                                <Dialog.Close asChild>
-                                    <button className="dialog-close" aria-label="Close">
-                                      x
-                                    </button>
-                                </Dialog.Close>
-                                <Dialog.Content className="DialogContent">
-                                  <div className="assistant-image">
-                                    <a href={href} className="assistant-image-download" download>Dowload</a>
-                                    <img src={href} alt="Attachment" />
-                                  </div>
-                                  
-                                </Dialog.Content>
-                            </Dialog.Portal>
-                        </Dialog.Root>
-                        
+                  )}
+         <div className="chat-message-user-edit"><Edit /></div></div>}
 
-                      </div>
-                    </div>
-                  );
-                }
-                
-                return <a href={href}>{children}</a>;
-              },
-            }}
-          >
-            {message.content}
-          </Markdown>
-        )}
       </div>
-    </div>
   );
 }
 

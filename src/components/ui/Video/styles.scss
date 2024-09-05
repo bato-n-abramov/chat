@@ -1,0 +1,77 @@
+@import '../../../styles/variables';
+.video {
+    width: 100%;
+    max-width: 500px;
+
+    .react-player {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    input[type='range'] {
+        -webkit-appearance: none;
+        width: 100%;
+        max-width: 210px;
+        height: 2px;
+        border-radius: 2px;
+        background-color: #404040B2;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+
+    .player-controls {
+        display: flex;
+        align-items: center;
+        border-radius: 16px;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 8px;
+
+        .play-pause {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
+        }
+
+        .button-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            border-radius: 14px;
+            background-color: #141718;
+            padding: 10px;
+
+            .volume, 
+            .fullscreen {
+                background-color: transparent;
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .player-buttons {
+            display: flex;
+            align-items: center;
+            background-color: $bg-color;
+            padding: 4px;
+            flex: 1 1 auto;
+            gap: 15px;
+            border-radius: 16px;
+        }
+
+        .video-download {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background-color: $bg-color;
+        }
+    }
+}
+

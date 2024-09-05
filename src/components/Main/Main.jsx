@@ -73,8 +73,10 @@ const Main = ({ isSidebarOpen, isNewChat }) => {
     markdown: [markdownContent] ,
     image: [
       "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-
-    ]
+    ],
+    video: [
+      "https://www.w3schools.com/html/mov_bbb.mp4", 
+    ],
   };
 
   const saveConversationContent = (conversationId, messages) => {
@@ -134,6 +136,8 @@ const Main = ({ isSidebarOpen, isNewChat }) => {
       category = "markdown"; 
     } else if (userPrompt.toLowerCase().includes("image")) {
       category = "image"; 
+    } else if (userPrompt.toLowerCase().includes("video")) {
+      category = "video"; 
     }
     
     const randomResponse =

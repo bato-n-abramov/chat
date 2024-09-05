@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from "../ui/Button/Button";
 import CryptoInfo from '../CryptoInfo/CryptoInfo';
+import Create from '../ui/Icons/Create';
+import Menu from '../ui/Icons/Menu';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import Chat from '../ui/Icons/Chat';
+import Dots from '../ui/Icons/Dots';
+
 import './styles.scss';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
@@ -67,17 +72,18 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       <div
         className="sidebar"
         style={{
-          width: isOpen ? sidebarWidth : '0',
+          width: isOpen ? sidebarWidth : '40px',
           overflowY: 'auto',
         }}
       >
         <div className='sidebar-wrapper'>
           <div className='sidebar-header'>
-            <Button onClick={toggleSidebar} className="sidebar-close">
-              Toggler
+            <Button onClick={toggleSidebar} className="sidebar-close btn-transparent">
+                <Menu />
             </Button>
-            <Button onClick={startNewChat} className="sidebar-new-chat">
-              New chat
+            <Button onClick={startNewChat} className="btn-transparent sidebar-new-chat">
+              <span>New chat</span>
+              <Create />
             </Button>
           </div>
   
@@ -102,10 +108,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                             className={`conversation-item ${isActive ? 'active' : ''}`}
                             onClick={() => handleConversationClick(conversation.id)}
                           >
+                            <Chat />
                             <strong>{title}</strong>
                             <DropdownMenu.Root>
                                 <DropdownMenu.Trigger>
-                                    <div>...</div>
+                                    <Dots />
                                 </DropdownMenu.Trigger>
                                 <DropdownMenu.Content>
                                     <DropdownMenu.Item shortcut="⌘ E">Edit</DropdownMenu.Item>

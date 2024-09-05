@@ -3,6 +3,8 @@ import Textarea from "../ui/Textarea/Textarea";
 import Button from "../ui/Button/Button";
 import Switcher from "../ui/Switcher/Switcher";
 import * as Separator from '@radix-ui/react-separator';
+import Send from "../ui/Icons/Send";
+import Attach from "../ui/Icons/Attach";
 import "./styles.scss";
 
 export default function ChatInput({
@@ -100,8 +102,8 @@ export default function ChatInput({
               setUserPrompt(e.target.value);
             }}
           />
-          <Button type="button" onClick={handleAttachClick}>
-              Attach
+          <Button type="button" className="chatInput-attach btn-transparent" onClick={handleAttachClick}>
+              <Attach />
           </Button>
           <input
             type="file"
@@ -130,14 +132,13 @@ export default function ChatInput({
               </div>
             ))}
           </div>
-          <div className="chatInput-btn">
             <Button
               type="submit"
+              className="chatInput-send"
               disabled={isSendButtonDisabled}
             >
-              Send
+              <Send />
             </Button>
-          </div>
         </form>
       </div>
     </div>

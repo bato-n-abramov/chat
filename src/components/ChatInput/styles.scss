@@ -6,10 +6,12 @@
     align-self: center;
     margin-top: auto;
     width: 100%;
-    max-width: 740px;
+    padding-top: 20px;
+
 
     &-wrapper {
         width: 100%;
+        max-width: 740px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -19,21 +21,39 @@
     }
 
     &-form {
+        display: flex;
+        align-items: center;
         flex: 1;
         position: relative;
-    }
-
-    &-btn {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        padding-left: 30px;
     }
 
     &-web {
         display: flex;
         gap: 12px;
         align-items: center;
+    }
+
+    &-attach {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &-send {
+        width: 64px;
+        height: 64px;
+        border-radius: 20px;
+        flex: 1 0 auto;
+
+        &:disabled {
+            svg {
+                path {
+                    stroke: #a3a3a3;
+                }
+            }
+        }
     }
 
     .SeparatorRoot[data-orientation='vertical'] {

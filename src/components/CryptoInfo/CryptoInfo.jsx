@@ -1,4 +1,6 @@
 import React from "react";
+import Ethereum from "../ui/Icons/Ethereum";
+import Arrow from "../ui/Icons/Arrow";
 import './styles.scss';
 
 
@@ -11,8 +13,9 @@ const CryptoInfo = ({className}) => {
                     <div className="crypto-info-balance-value">15 GPT / 350 GPT</div>
                 </div>
                 <div className="crypto-name">
-                    <div className="icon"></div>
-                    Etherium 
+                    <Ethereum />
+                    <span>Etherium </span>
+                    <Arrow />
                 </div>
             </div>
         </div>

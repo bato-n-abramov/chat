@@ -2,6 +2,8 @@ import React from 'react';
 import Dropdown from '../ui/Dropdown/Dropdown';
 import Button from "../ui/Button/Button";
 import { useNavigate } from 'react-router-dom';
+import Create from '../ui/Icons/Create';
+import Support from '../ui/Icons/Support';
 
 import './styles.scss';
 
@@ -16,11 +18,16 @@ const Header = () => {
   return (
     <div className="header">
         <div className='header-wrapper'>
-          <Button onClick={startNewChat} className="header-new-chat">
-              New chat
+          <Button onClick={startNewChat} className="header-new-chat btn-transparent">
+             <span>New chat</span>
+              <Create />
             </Button>
-            <div className='header-info'>Info</div>
+            <div className='header-info'>
+              <Support />
+            </div>
+           <div className='header-dropdown'>
             <Dropdown />
+           </div>
         </div>
     </div>
   );
