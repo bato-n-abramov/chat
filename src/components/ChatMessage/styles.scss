@@ -12,6 +12,10 @@
     display: flex;
     gap: 9px;
     align-items: flex-start;
+    
+    @media (max-width: 768px) {
+      max-width: 80%;
+    }
   }
 }
 
@@ -70,6 +74,10 @@
     padding: 2px 8px;
     border-radius: 6px;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
 
     &:hover:not(.chat-message-assistant-reactions) {
       background-color: #37383C;
@@ -150,8 +158,13 @@
   justify-content: center;
   width: 48px;
   height: 48px;
+  flex: 1 0 auto;
   border-radius: 16px;
   background-color: #171717;
+
+  @media (max-width: 768px) {
+   display: none;
+  }
 }
 
 .chat-message-markdown {
@@ -178,24 +191,25 @@
     border-collapse: separate;
     width: 100%;
     text-align: left;
-    border-spacing: 1px 1px;
     font-size: 14px;
+    border-spacing: 0 0;
   }
 
   thead {
     th {
+      border-style: solid;
       background-color: #242628;
-      border-bottom-width: 1px;
-      border-color: #404040;
       border-top-width: 1px;
+      border-bottom-width: 1px;
       padding: 12px;
       color: #fff;
+      border-color: #404040;
       font-weight: 600;
+      border-left-width: 1px;
   
 
       &:first-child {
         border-top-left-radius: 5px;
-        border-left-width: 1px;
       }
 
       &:last-child {
@@ -208,24 +222,27 @@
   tbody {
     tr:last-child {
       td:first-child {
-        border-left-width: 1px;
         border-bottom-left-radius: 5px;
       }
-      
+
       td:last-child {
         border-bottom-right-radius: 5px;
-        border-right-width: 1px;
       }
     }
 
     td {
-      border-left-width: 1px;
-      border-bottom-width: 1px;
+      border-style: solid;
       border-color: #404040;
       padding: 12px;
       background-color: #1C1F20;
       color: #A3A3A3;
       font-weight: 400;
+      border-bottom-width: 1px;
+      border-left-width: 1px;
+
+      &:last-child {
+        border-right-width: 1px;
+      }
     }
   }
 
@@ -233,15 +250,37 @@
     background-color: #242628;
     border-radius: 12px;
     padding: 16px;
+    overflow: auto;
+    font-size: 14px;
+    line-height: 1.5;
+
+    .hljs-attr,
+    .hljs-selector-class,
+    .hljs-selector-tag {
+      color: #FFD027;
+    }
+
+    .hljs-string,
+    .hljs-attribute {
+      color: $green-color;
+    }
 
     .code-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #404040;
+      padding-bottom: 16px;
+    }
+
+    .code-copy {
+      padding: 8px 16px;
+      border-radius: 12px;
     }
 
     .my-0 {
+      display: block;
+      margin-top: 15px;
       background-color: unset !important;
     }
   }

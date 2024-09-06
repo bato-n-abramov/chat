@@ -7,4 +7,9 @@
     background-color: $bg-color;
     border-radius: 20px;
     padding: 20px;
+    width: 100%;
+
+    @media (max-width: 768px) {
+        border-radius: 0;
+       }
 }

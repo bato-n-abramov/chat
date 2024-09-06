@@ -27,13 +27,13 @@ function App() {
               <Route
                 path=":cId"
                 element={
-                  <Main isSidebarOpen={isSidebarOpen}  />
+                  <Main isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}  />
                 }
               />
               <Route
                 path="/"
                 element={
-                  <Main isSidebarOpen={isSidebarOpen}  isNewChat={true} />
+                  <Main isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}  isNewChat={true} />
                 }
               />
             </Routes>

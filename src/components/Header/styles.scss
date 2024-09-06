@@ -9,12 +9,25 @@
         gap: 8px;
     }
 
+    &-burger {
+        display: none;
+
+        @media (max-width: 768px) {
+            display: block;
+            margin-right: auto;
+        }
+    }
+
     .shifted & .header-new-chat {
         visibility: hidden;
     }
     
     .header-new-chat {
         margin-right: auto;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
 
     &-info {
@@ -32,6 +45,10 @@
         border-radius: 14px;
         background-color: $add-bg-color;
         padding: 4px;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
 
 
         .btn-soft {

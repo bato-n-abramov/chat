@@ -4,10 +4,10 @@ import Button from "../ui/Button/Button";
 import { useNavigate } from 'react-router-dom';
 import Create from '../ui/Icons/Create';
 import Support from '../ui/Icons/Support';
-
+import Burger from '../ui/Icons/Burger';
 import './styles.scss';
 
-const Header = () => {
+const Header = ({toggleSidebar}) => {
   const navigate = useNavigate();
 
   const startNewChat = () => {
@@ -21,13 +21,16 @@ const Header = () => {
           <Button onClick={startNewChat} className="header-new-chat btn-transparent">
              <span>New chat</span>
               <Create />
-            </Button>
-            <div className='header-info'>
-              <Support />
-            </div>
-           <div className='header-dropdown'>
+          </Button>
+          <Button onClick={toggleSidebar} className="header-burger btn-transparent">
+            <Burger/>
+          </Button>
+          <div className='header-info'>
+            <Support />
+          </div>
+          <div className='header-dropdown'>
             <Dropdown />
-           </div>
+          </div>
         </div>
     </div>
   );

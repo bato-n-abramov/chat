@@ -11,6 +11,7 @@ import Video from "../ui/Video/Video";
 import Download from "../ui/Icons/Download";
 import Like from "../ui/Icons/Like";
 import Dislike from "../ui/Icons/Dislike";
+import Highlight from 'react-highlight'
 
 import './styles.scss';
 
@@ -68,7 +69,7 @@ function ChatMessage({ message }) {
                       components={{
                         code({ node, inline, className, children, ...props }) {
                           const match = /language-(\w+)/.exec(className || '');
-                          const language = match ? match[1] : 'markdown';
+                          const language = match ? match[1] : '';
         
                           function copyToClipboard() {
                             navigator.clipboard.writeText(String(children));
@@ -76,31 +77,30 @@ function ChatMessage({ message }) {
         
                           return (
                             <div className="code-wrapper">
-                              <div className='code-header'>
-                                <div className="code-lang">
-                                  {language}
-                                </div>
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  className=""
-                                  onClick={copyToClipboard}
-                                >
-                                  Copy Code
-                                </Button>
-                              </div>
-                              <SyntaxHighlighter
+                               {language && (
+                                <div className='code-header'>
+                                    <div className="code-lang">
+                                      {language}
+                                    </div>
+                                    <Button
+                                      variant="outline btn-primary"
+                                      size="icon"
+                                      className="code-copy"
+                                      onClick={copyToClipboard}
+                                    >
+                                      Copy Code
+                                    </Button>
+                                  </div>
+                                )}
+
+                              <Highlight
                                 language={language}
                                 style={oneDark}
                                 PreTag="div"
                                 className="my-0"
-                                customStyle={{
-                                  margin: 0,
-                                  borderRadius: '0 0 0.3em 0.3em',
-                                }}
                               >
                                 {String(children).replace(/\n$/, '')}
-                              </SyntaxHighlighter>
+                              </Highlight>
                             </div>
                           );
                         },

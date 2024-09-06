@@ -4,11 +4,13 @@ import Button from "../ui/Button/Button";
 import CryptoInfo from '../CryptoInfo/CryptoInfo';
 import Create from '../ui/Icons/Create';
 import Menu from '../ui/Icons/Menu';
+import Dropdown from '../ui/Dropdown/Dropdown';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import Chat from '../ui/Icons/Chat';
 import Dots from '../ui/Icons/Dots';
 
 import './styles.scss';
+import Burger from '../ui/Icons/Burger';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const navigate = useNavigate();
@@ -70,22 +72,26 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
     return (
       <div
-        className="sidebar"
+        className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}
         style={{
           width: isOpen ? sidebarWidth : '40px',
-          overflowY: 'auto',
         }}
       >
         <div className='sidebar-wrapper'>
           <div className='sidebar-header'>
             <Button onClick={toggleSidebar} className="sidebar-close btn-transparent">
                 <Menu />
+                <Burger />
             </Button>
             <Button onClick={startNewChat} className="btn-transparent sidebar-new-chat">
               <span>New chat</span>
               <Create />
             </Button>
           </div>
+
+          <div className='sidebar-dropdown'>
+            <Dropdown />
+           </div>
   
           <div className='sidebar-content' 
             style={{

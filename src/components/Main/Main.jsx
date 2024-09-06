@@ -6,7 +6,7 @@ import ChatMessageWindow from '../ChatMessageWindow/ChatMessageWindow';
 import Header from '../Header/Header';
 import './styles.scss';
 
-const Main = ({ isSidebarOpen, isNewChat }) => {
+const Main = ({ isSidebarOpen, isNewChat, toggleSidebar }) => {
   const { cId } = useParams(); 
   const [messages, setMessages] = useState([]);
   const [messageInProgress, setMessageInProgress] = useState("");
@@ -17,41 +17,60 @@ const Main = ({ isSidebarOpen, isNewChat }) => {
   const isNewChatFromState = location.state?.isNewChat;
 
 
-  const markdownContent = `
-  # Sample Markdown Content
-  
-  ## Heading Level 2
-  
-  This is a paragraph with **bold text** and *italic text*. 
-  
-  Here is a list of items:
-  - Item 1
-  - Item 2
-  - Item 3
-  
-  ### Heading Level 3
-  
-  You can also include [links](https://www.example.com) to external sites.
-  
-  #### Code Example
-  
-  Here is a code snippet in JavaScript:
-  
-  \`\`\`javascript
-  const greet = (name) => {
-    console.log(\`Hello, \${name}!\`);
-  };
-  
-  greet('World');
+  const markdownContent = `  
+  \`\`\`Html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #fff 3px solid;
+        }
+        header h1 {
+            text-align: center;
+            margin: 0;
+        }
+        .article {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
   \`\`\`
-  
-  #### Table Example
-  
-  | Header 1 | Header 2 |
-  |----------|----------|
-  | Row 1    | Data 1   |
-  | Row 2    | Data 2   |
   `;
+
+  const table = `
+  Here is table example
+  | Fruit    | Taste    | Common Uses |
+  |----------|----------|-----------
+  | Apple    | Sweet/Tart| Snacks, baking, salads |
+  | Banana   | Sweet   |  Snacks, smoothies, baking |
+  | Orange   | Citrus   | Juices, snacks, salads |
+  | Strawberry| Sweet/Tart| Desserts, salads, smoothies |
+  | Grape   | Sweet/Tart   | Snacks, juices, salads |
+  | Apple   | Sweet/Tart   | Snacks, baking, salads |
+  | Orange   | Citrus   | Juices, snacks, salads |
+  `
   
 
   const responses = {
@@ -70,7 +89,8 @@ const Main = ({ isSidebarOpen, isNewChat }) => {
       "Could you please clarify your question?",
       "I'm here to help, but I didn't understand that.",
     ],
-    markdown: [markdownContent] ,
+    markdown: [markdownContent],
+    table: [table],
     image: [
       "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
     ],
@@ -138,6 +158,8 @@ const Main = ({ isSidebarOpen, isNewChat }) => {
       category = "image"; 
     } else if (userPrompt.toLowerCase().includes("video")) {
       category = "video"; 
+    } else if (userPrompt.toLowerCase().includes("table")) {
+      category = "table"; 
     }
     
     const randomResponse =
@@ -159,7 +181,7 @@ const Main = ({ isSidebarOpen, isNewChat }) => {
 
   return (
     <main className={`main-content ${isSidebarOpen ? 'shifted' : ''}`}>
-      <Header />
+      <Header  toggleSidebar={toggleSidebar} />
       {shouldShowIntro && !hasStartedConversation && <Intro />}
       <ChatMessageWindow messages={messages} messageInProgress={messageInProgress} />
       <ChatInput onSendMessage={handleSendMessage} />
