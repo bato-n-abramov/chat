@@ -8,6 +8,11 @@
         height: 100% !important;
         border-radius: 16px;
         overflow: hidden;
+
+        video {
+            border-radius: 16px;
+            overflow: hidden;
+        }
     }
 
     input[type='range'] {
@@ -38,6 +43,13 @@
             width: 40px;
             height: 40px;
             border-radius: 14px;
+            min-width: 40px;
+            @media (max-width: 768px) {
+                width: 32px;
+                min-width: 32px;
+                height: 32px;
+                border-radius: 12px;
+            }
         }
 
         .button-wrapper {
@@ -53,13 +65,18 @@
                 background-color: transparent;
                 width: 20px;
                 height: 20px;
+
+                @media (max-width: 768px) {
+                    height: 12px;
+                }
             }
         }
 
         .player-buttons {
             display: flex;
             align-items: center;
-            background-color: $bg-color;
+            background-color: var(--dark);
+            height: 48px;
             padding: 4px;
             flex: 1 1 auto;
             gap: 15px;
@@ -68,9 +85,10 @@
 
         .video-download {
             width: 48px;
+            min-width: 48px;
             height: 48px;
             border-radius: 16px;
-            background-color: $bg-color;
+            background-color: var(--dark);
         }
     }
 }

@@ -7,6 +7,25 @@
     margin-top: auto;
     width: 100%;
     padding-top: 20px;
+    position: relative;
+
+    @media (max-width: 768px) {
+        margin-top: auto;
+        padding-top: 10px;
+
+        &::before {
+            content: "";
+            width: 150%;
+            height: 1px;
+            background-color: #37383C;
+            position: absolute;
+            top: 0;
+
+            .light & {
+                background-color: var(--chat-user-bg-light);
+            }
+        }
+    }
 
 
     &-wrapper {
@@ -15,14 +34,23 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: $add-bg-color;
+        background-color: var(--chat-assistent-bg-dark);
         border-radius: 24px;
-        padding: 10px;
+        padding: 10px 10px 10px 24px;
+
+        .light & {
+            background-color: var(--light);
+
+            @media (max-width: 768px) {
+                background-color: unset;
+             }
+        }
 
         @media (max-width: 768px) {
             flex-direction: column;
             align-items: flex-start;
             background-color: unset;
+            padding: 10px;
         }
     }
 
@@ -34,10 +62,14 @@
         padding-left: 30px;
 
         @media (max-width: 768px) {
-            background-color: #141718;
+            background-color: var(--chat-assistent-bg-dark);
             border-radius: 16px;
             width: 100%;
             padding: 8px 8px 8px 40px;
+
+            .light & {
+                background-color: var(--light);
+            }
         }
     }
 
@@ -45,10 +77,17 @@
         display: flex;
         gap: 12px;
         align-items: center;
+        color: var(--white);
+        font-size: 14px;
+
+        .light & {
+            color: var(--text-color-light);
+        }
 
         @media (max-width: 768px) {
             margin-bottom: 12px;
             padding-left: 15px;
+            font-size: 12px;
         }
     }
 
@@ -75,6 +114,12 @@
         }
 
         &:disabled {
+            background-color: var(--dark);
+
+            .light & {
+                background-color: var(--white);
+            }
+
             svg {
                 path {
                     stroke: #a3a3a3;
@@ -86,7 +131,11 @@
     .SeparatorRoot[data-orientation='vertical'] {
         height: 100%;
         width: 1px;
-        background-color: #404040;
+        background-color: #404040B2;
+
+        .light & {
+            background-color: #AAAFB366;
+        }
     }
 
     .chatInput-files {
@@ -94,13 +143,18 @@
         gap: 6px;
         position: absolute;
         bottom: 125%;
-        left: 0;
+        left: 42px;
         background-color: #141718;
         padding: 8px;
         border-radius: 12px;
 
+        @media (max-width: 768px) {
+            bottom: -60px;
+            background-color: unset;
+        }
+
         &:empty {
-            visibility: hidden;
+            display: none;
         }
 
         .chatInput-file {

@@ -4,8 +4,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: auto;
+    margin-top: 160px;
     width: 100%;
+    color: var(--text-color-dark);
+
+    @media (max-width: 768px) {
+        margin-top: auto;
+    }
+
+    .light & {
+        color: var(--text-color-light);
+    }
 
     &-wrapper {
         display: flex;
@@ -35,6 +44,11 @@
         font-weight: 600;
         margin-bottom: 20px;
         text-align: center;
+        line-height: 1.5;
+
+        @media (max-width: 768px) {
+           margin-bottom: 16px;
+        }
     }
 
     &-version {
@@ -42,7 +56,13 @@
         border-radius: 8px;
         width: max-content;
         padding: 6px 10px;
-        margin-bottom: 44px;
+        margin-bottom: 45px;
+        font-size: 12px;
+
+        .light & {
+            background-color: var(--dark);
+            color: var(--white);
+        }
 
         @media (max-width: 768px) {
             margin-bottom: 10px;
@@ -59,7 +79,7 @@
         @media (max-width: 768px) {
             flex-direction: column;
             align-items: center;
-           }
+        }
     }
 
     &-prompt {
@@ -67,7 +87,15 @@
         max-width: 240px;
         padding: 16px;
         border-radius: 20px;
-        background-color: $add-bg-color;
+        background-color: var(--chat-assistent-bg-dark);
+
+        @media (max-width: 768px) {
+            padding: 15px 15px 10px;
+        }
+
+        .light & {
+            background-color: var(--light);
+        }
 
         &-title {
             margin-top: 20px;

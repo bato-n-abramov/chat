@@ -6,13 +6,13 @@ const Dropdown = () => {
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger>
-                <Button variant="soft">
-                    <div className='dropdown-avatar'>
+                <div className='dropdown-wrapper'>
+                <div className='dropdown-avatar'>
                         <Avatar />
                     </div>
                     <span>0x56e...B6</span>
                     <Arrow />
-                </Button>
+                </div>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>
                 <DropdownMenu.Item shortcut="⌘ E">Edit</DropdownMenu.Item>

@@ -17,7 +17,6 @@ function App() {
     <ThemeProvider>
       <Router>
         <div className="App">
-          <ThemeSwitcher />
           <div className="layout">
             <Sidebar 
               isOpen={isSidebarOpen} 
@@ -27,13 +26,13 @@ function App() {
               <Route
                 path=":cId"
                 element={
-                  <Main isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}  />
+                  <Main isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} themeSwitcher={<ThemeSwitcher />}  />
                 }
               />
               <Route
                 path="/"
                 element={
-                  <Main isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}  isNewChat={true} />
+                  <Main isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} themeSwitcher={<ThemeSwitcher />} isNewChat={true} />
                 }
               />
             </Routes>

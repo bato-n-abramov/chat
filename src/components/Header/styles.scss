@@ -2,18 +2,42 @@
 
 .header {
     width: 100%; 
+    padding-bottom: 12px;
 
     &-wrapper {
         display: flex;
         width: 100%;
         gap: 8px;
+        color: var(--white);
+
+        .light & {
+            color: var(--black);
+        }
     }
 
     &-burger {
         display: none;
 
+        &.btn-transparent {
+            background-color: var(--chat-assistent-bg-dark);
+
+            .light & {
+                background-color: var(--light);
+            }
+        }
+
+        path {
+            .light &  {
+                stroke: var(--black);
+            }
+        }
+
         @media (max-width: 768px) {
-            display: block;
+            display: flex;
+            width: 40px;
+            height: 40px;
+            border-radius: 16px;
+            background-color: var(--chat-assistent-bg-dark);
             margin-right: auto;
         }
     }
@@ -21,44 +45,66 @@
     .shifted & .header-new-chat {
         visibility: hidden;
     }
-    
-    .header-new-chat {
-        margin-right: auto;
 
-        @media (max-width: 768px) {
-            display: none;
-        }
-    }
-
-    &-info {
+    &-info,
+    &-share {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 48px;
         height: 48px;
         border-radius: 16px;
-        background-color: $add-bg-color;
+        background-color: var(--chat-assistent-bg-dark);
         cursor: pointer;
+
+        &:hover {
+            background-color: var(--chat-user-bg-dark);
+
+            .light & {
+                background-color:  var(--chat-user-bg-light);
+            }
+        }
+
+        @media (max-width: 768px) {
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
+        }
+
+        .light & {
+            background-color: var(--light);
+        }
     }
 
     &-dropdown {
         border-radius: 14px;
-        background-color: $add-bg-color;
+        background-color: var(--chat-assistent-bg-dark);
         padding: 4px;
+        color: var(--text-color-dark);
+
+        .light & {
+            background-color: var(--light);
+            color: var(--text-color-light);
+        }
 
         @media (max-width: 768px) {
             display: none;
         }
+    }
 
+    .dropdown-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
 
-        .btn-soft {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+        & > svg {
+            transform: rotate(90deg);
 
-            & > svg {
-                transform: rotate(90deg);
+            path {
+                .light & {
+                    stroke: var(--black);
+                }
             }
         }
     }
@@ -70,7 +116,11 @@
         width: 40px;
         height: 40px;
         border-radius: 10px;
-        background-color: #222427;
+        background-color: var(--dark);
+
+        .light & {
+            background-color: var(--black);
+        }
     }
 
     &-new-chat {
@@ -78,8 +128,15 @@
         padding: 8px 16px;
         border-radius: 14px;
 
+        margin-right: auto;
+        height: 40px;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+
         &.btn {
-            background-color: $green-color;
+            background-color: var(--green-color);
             color: #151617;
         }
     }

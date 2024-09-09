@@ -2,6 +2,7 @@ import React, {useState, useEffect } from "react";
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import Highlight from 'react-highlight';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import * as Dialog from '@radix-ui/react-dialog';
 import AssistantAvatar from "../ui/Icons/AssistantAvatar";
@@ -11,7 +12,7 @@ import Video from "../ui/Video/Video";
 import Download from "../ui/Icons/Download";
 import Like from "../ui/Icons/Like";
 import Dislike from "../ui/Icons/Dislike";
-import Highlight from 'react-highlight'
+import Close from "../ui/Icons/Close";
 
 import './styles.scss';
 
@@ -67,6 +68,7 @@ function ChatMessage({ message }) {
                       remarkPlugins={[remarkGfm]}
                       className="chat-message-markdown"
                       components={{
+                        // p: ({ node, ...props }) => <div {...props} />,
                         code({ node, inline, className, children, ...props }) {
                           const match = /language-(\w+)/.exec(className || '');
                           const language = match ? match[1] : '';
@@ -127,11 +129,10 @@ function ChatMessage({ message }) {
                                       </div>
                                     </Dialog.Trigger>
                                       <Dialog.Portal>
-                                        
                                         <Dialog.Overlay  className="DialogOverlay" />
                                         <Dialog.Close asChild>
                                               <button className="dialog-close" aria-label="Close">
-                                                x
+                                              <Close />
                                               </button>
                                           </Dialog.Close>
                                         <Dialog.Content className="DialogContent">
@@ -154,7 +155,7 @@ function ChatMessage({ message }) {
                                         <Dialog.Overlay  className="DialogOverlay"  />
                                           <Dialog.Close asChild>
                                               <button className="dialog-close" aria-label="Close">
-                                                x
+                                                <Close />
                                               </button>
                                           </Dialog.Close>
                                           <Dialog.Content className="DialogContent">

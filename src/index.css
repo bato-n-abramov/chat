@@ -1,24 +1,38 @@
 @import "./reset.css";
 @import "./fonts/stylesheet.css";
 
+
+:root {
+  --white: #ffffff;
+  --black: #0F0F10;
+  --light: #F3F5F7;
+  --dark: #222427;
+  --chat-assistent-bg-dark: #141718;
+  --chat-user-bg-dark: #37383C;
+  --chat-user-bg-light: #DFE4E8;
+  --text-color-dark: #FAFAFA;
+  --text-color-light: #0F0F10;
+  --icons-fill-light: #8E969C;
+  --green-color: #44C884;
+}
+
 html,
 body {
   height: 100%;
 }
 
-body.light {
-  --background-color: #ffffff;
+
+/* body.light {
+  --background-color: #F3F5F7;
   --text-color: #000000;
 }
 
 body.dark {
   --background-color: #000000;
   --text-color: #ffffff;
-}
+} */
 
 body {
-  background-color: var(--background-color);
-  color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
   font-family: 'Inter', sans-serif;
 }

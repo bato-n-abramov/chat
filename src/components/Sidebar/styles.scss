@@ -2,17 +2,21 @@
 
 .sidebar {
     overflow: hidden;
-    padding: 20px 12px;
-    background-color: $black-color;
+    padding: 18px 0 0;
+    background-color: var(--black);
     color: #fff;
     height: 100%; 
-    transition: 0.3s ease;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: width 0.3s ease;
+
+    .light & {
+        background-color: var(--light);
+    }
 
     @media (max-width: 768px) {
         position: fixed;
         left: -999px;
         z-index: 9;
+        padding-top: 24px;
 
 
         &-open {
@@ -21,9 +25,41 @@
     }
 
     &-dropdown {
+        display: flex;
+        align-items: center;
         border-radius: 14px;
         background-color: #222527;
         margin-top: 24px;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 48px;
+
+        .light & {
+            background-color: var(--chat-user-bg-light);
+            color: var(--text-color-light);
+        }
+
+        button {
+            width: 100%;
+            padding: 0 4px;
+        }
+
+        .dropdown-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            & > svg {
+                margin-left: auto;
+
+                path {
+                    .light & {
+                        stroke: var(--black);
+                    }
+                }
+            }
+        }
 
         @media (min-width: 768px) {
             display: none;
@@ -35,31 +71,76 @@
             align-items: center;
             width: 40px;
             height: 40px;
+            background-color: var(--black);
+            border-radius: 10px;
+
+            .light & {
+                background-color: var(--light);
+            }
         }
     }
 
     &-close {
         background-color: transparent;
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+
+        &:hover {
+            background-color: var(--chat-user-bg-dark);
+
+            .light & {
+                background-color: var(--chat-user-bg-light);
+            }
+        }
+
+        path {
+            .light &  {
+                stroke: var(--black);
+            }
+        }
+
+        @media (max-width: 768px) {
+            display: flex;
+            width: 40px;
+            height: 40px;
+            border-radius: 16px;
+            background-color: var(--chat-assistent-bg-dark);
+            margin-right: auto;
+
+            &.btn-transparent {
+                background-color: var(--dark);
+    
+                .light & {
+                    background-color: var(--chat-user-bg-light);
+                }
+            }
+        }
     }
 
     &-wrapper {
         display: flex;
         flex-direction: column;
-        width: 270px;
         height: 100%;
+        width: 290px;
 
         @media (max-width: 768px) {
-            padding-bottom: 30px;
+            padding-bottom: 12px;
         }
     }
 
     &-header {
         display: flex;
         justify-content: space-between;
+        padding: 0 24px 0 5px;
 
         @media (max-width: 768px) {
             padding-bottom: 24px;
-            border-bottom: 1px solid #404040;
+            border-bottom: 1px solid #404040B2;
+
+            .light & {
+                border-color: #40404019;
+            }
         }
 
         .menu {
@@ -73,6 +154,12 @@
         .burger {
             display: none;
 
+            path {
+                .light &  {
+                    stroke: var(--black);
+                }
+            }
+
             @media (max-width: 768px) {
                display: block;
             }
@@ -80,8 +167,9 @@
     }
 
     &-content {
-        padding-top: 35px;
+        padding-top: 30px;
         flex: 1 0 0%;
+        padding-inline: 12px;
         overflow-y: auto;
     }
 
@@ -101,6 +189,12 @@
         text-overflow: ellipsis;
         gap: 10px;
         min-height: 48px;
+        color: var(--text-color-dark);
+        cursor: pointer;
+
+        .light & {
+            color: var(--text-color-light);
+        }
 
         svg {
             opacity: 0;
@@ -126,13 +220,23 @@
         &.active,
         &:hover {
             border-radius: 10px;
-            background-color: #222527;
+            background-color: var(--dark);
+
+            .light & {
+                background-color: var(--chat-user-bg-light);
+            }
 
             button,
             svg {
                 opacity: 1;
                 width: max-content;
                 display: block;
+
+                path {
+                    .light & {
+                        stroke: var(--black);
+                    }
+                }
             }
         }
 
@@ -145,6 +249,12 @@
         gap: 8px;
         padding: 8px 16px;
         border-radius: 14px;
+
+        @media (max-width: 768px) {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+        }
 
         span {
             @media (max-width: 768px) {

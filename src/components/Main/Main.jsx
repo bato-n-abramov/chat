@@ -6,7 +6,7 @@ import ChatMessageWindow from '../ChatMessageWindow/ChatMessageWindow';
 import Header from '../Header/Header';
 import './styles.scss';
 
-const Main = ({ isSidebarOpen, isNewChat, toggleSidebar }) => {
+const Main = ({ isSidebarOpen, isNewChat, toggleSidebar, themeSwitcher }) => {
   const { cId } = useParams(); 
   const [messages, setMessages] = useState([]);
   const [messageInProgress, setMessageInProgress] = useState("");
@@ -71,7 +71,16 @@ const Main = ({ isSidebarOpen, isNewChat, toggleSidebar }) => {
   | Apple   | Sweet/Tart   | Snacks, baking, salads |
   | Orange   | Citrus   | Juices, snacks, salads |
   `
-  
+  const textContent = `
+  Blockchain technology has a wide range of applications, and how you use it depends on your goals. Here are some common uses:
+
+  ## Cryptocurrencies
+  The most well-known application of blockchain is **cryptocurrencies** like Bitcoin and Ethereum. You can buy, sell, or trade cryptocurrencies, or even create your own if you have the technical know-how.
+
+  ## Smart Contracts
+  Platforms like Ethereum allow you to create **smart contracts**, which are self-executing contracts with the terms directly written into code. They automatically enforce and execute agreements based on predefined conditions.
+
+  `
 
   const responses = {
     greetings: [
@@ -91,6 +100,7 @@ const Main = ({ isSidebarOpen, isNewChat, toggleSidebar }) => {
     ],
     markdown: [markdownContent],
     table: [table],
+    text: [textContent],
     image: [
       "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
     ],
@@ -152,7 +162,7 @@ const Main = ({ isSidebarOpen, isNewChat, toggleSidebar }) => {
       category = "greetings";
     } else if (userPrompt.toLowerCase().includes("bye")) {
       category = "farewell";
-    } else if (userPrompt.toLowerCase().includes("markdown")) {
+    } else if (userPrompt.toLowerCase().includes("code")) {
       category = "markdown"; 
     } else if (userPrompt.toLowerCase().includes("image")) {
       category = "image"; 
@@ -160,6 +170,8 @@ const Main = ({ isSidebarOpen, isNewChat, toggleSidebar }) => {
       category = "video"; 
     } else if (userPrompt.toLowerCase().includes("table")) {
       category = "table"; 
+    } else if (userPrompt.toLowerCase().includes("text")) {
+      category = "text"; 
     }
     
     const randomResponse =
@@ -177,11 +189,10 @@ const Main = ({ isSidebarOpen, isNewChat, toggleSidebar }) => {
 
   const shouldShowIntro = isNewChat || isNewChatFromState;
 
-  console.log(cId, isNewChat, isNewChatFromState, hasStartedConversation);
 
   return (
     <main className={`main-content ${isSidebarOpen ? 'shifted' : ''}`}>
-      <Header  toggleSidebar={toggleSidebar} />
+      <Header  toggleSidebar={toggleSidebar} themeSwitcher={themeSwitcher}  hasStartedConversation = {hasStartedConversation} />
       {shouldShowIntro && !hasStartedConversation && <Intro />}
       <ChatMessageWindow messages={messages} messageInProgress={messageInProgress} />
       <ChatInput onSendMessage={handleSendMessage} />

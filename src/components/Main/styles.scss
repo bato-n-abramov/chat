@@ -4,12 +4,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: $bg-color;
+    background-color: var(--dark);
     border-radius: 20px;
     padding: 20px;
     width: 100%;
+    overflow-x: clip;
+    overflow-y: auto;
+
+    .light & {
+        background-color: var(--white);
+    }
 
     @media (max-width: 768px) {
         border-radius: 0;
+        padding-bottom: 0;
+        padding-top: 10px;
+        padding-inline: 10px;
        }
 }

@@ -14,7 +14,7 @@ import Burger from '../ui/Icons/Burger';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const navigate = useNavigate();
-  const sidebarWidth = '300px'; 
+  const sidebarWidth = '290px'; 
   const [conversations, setConversations] = useState([]);
   const [activeConversationId, setActiveConversationId] = useState(null); 
 
@@ -74,7 +74,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       <div
         className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}
         style={{
-          width: isOpen ? sidebarWidth : '40px',
+          width: isOpen ? sidebarWidth : '60px',
         }}
       >
         <div className='sidebar-wrapper'>
@@ -83,7 +83,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 <Menu />
                 <Burger />
             </Button>
-            <Button onClick={startNewChat} className="btn-transparent sidebar-new-chat">
+            <Button onClick={startNewChat}
+            style={{
+              visibility: isOpen ? 'visible' : 'hidden',
+            }}
+             className="btn-transparent sidebar-new-chat">
               <span>New chat</span>
               <Create />
             </Button>
@@ -120,10 +124,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                 <DropdownMenu.Trigger>
                                     <Dots />
                                 </DropdownMenu.Trigger>
-                                <DropdownMenu.Content>
+                                {/* <DropdownMenu.Content>
                                     <DropdownMenu.Item shortcut="⌘ E">Edit</DropdownMenu.Item>
                                     <DropdownMenu.Item shortcut="⌘ D">Delete</DropdownMenu.Item>
-                                </DropdownMenu.Content>
+                                </DropdownMenu.Content> */}
                             </DropdownMenu.Root>
                           </li>
                         );

@@ -5,6 +5,7 @@ import Switcher from "../ui/Switcher/Switcher";
 import * as Separator from '@radix-ui/react-separator';
 import Send from "../ui/Icons/Send";
 import Attach from "../ui/Icons/Attach";
+import Close from "../ui/Icons/Close";
 import "./styles.scss";
 
 export default function ChatInput({
@@ -16,7 +17,6 @@ export default function ChatInput({
   const [userPrompt, setUserPrompt] = useState("");
   const [websearch, setWebsearch] = useState(false);
   const [attachedFiles, setAttachedFiles] = useState([]);
-  const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
 
   async function sendMessage(event) {
@@ -92,7 +92,6 @@ export default function ChatInput({
         />
         <form onSubmit={sendMessage} className="chatInput-form">
           <Textarea
-            ref={textareaRef}
             className="chatInput-textarea"
             placeholder="Enter your request"
             value={userPrompt}
@@ -127,7 +126,7 @@ export default function ChatInput({
                   className="chatInput-file-remove"
                   onClick={() => handleRemoveFile(index)}
                 >
-                  x
+                  <Close />
                 </Button>
               </div>
             ))}

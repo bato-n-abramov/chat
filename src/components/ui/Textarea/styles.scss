@@ -3,7 +3,11 @@
     resize: none;
     background-color: transparent;
     border: none;
-    color: #fff;
+    color: var(--white);
     outline: none;
+
+    .light & {
+      color: var(--text-color-light);
+    }
   }
   

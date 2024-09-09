@@ -1,10 +1,22 @@
 .crypto-info {
+    width: 100%;
+    max-width: 270px;
     margin-top: auto;
     border-radius: 20px;
-    background-color: #222527;
+    background-color: var(--dark);
     padding: 20px 12px;
     font-size: 14px;
     font-weight: 600;
+    color: var(--text-color-dark);
+
+    @media (max-width: 768px) {
+        // padding: 12px 8px 8px;
+    }
+
+    .light & {
+        background-color: var(--white);
+        color: var(--text-color-light);
+    }
 
     &.hidden {
         visibility: hidden;
@@ -24,12 +36,24 @@
         display: flex;
         align-items: center;
         border-radius: 100px;
-        background-color: #0F0F10;
+        background-color: var(--black);
         padding: 8px;
         gap: 12px;
 
+        .light & {
+            background-color: var(--light);
+        }
+
         svg:last-child {
             margin-left: auto;
+        }
+
+        & > svg:last-child {
+            path {
+                .light & {
+                    stroke: var(--black);
+                }
+            }
         }
     }
 }
