@@ -392,6 +392,19 @@
     position: relative;
     width: 100%;
 
+    &:hover {
+     .assistant-image-download {
+      opacity: 1;
+      visibility: visible;
+     }
+    }
+
+    .assistant-image-download {
+      &:hover {
+        background-color: var(--chat-user-bg-light);
+      }
+    }
+
     img {
       border-radius: 24px;
       overflow: hidden;
