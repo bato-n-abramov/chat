@@ -1,5 +1,3 @@
-@import '../../styles/variables';
-
 .chat-message-wrappper {
   display: flex;
   align-items: flex-start;
@@ -117,7 +115,7 @@
 
     .like:hover {
       path {
-        stroke: $green-color;
+        stroke: var(--green-color);
       }
     }
 
@@ -185,7 +183,7 @@
         opacity: 0;
         visibility: hidden;
         border-radius: 10px;
-        background-color: $add-bg-color;
+        background-color: var(--chat-assistent-bg-dark);
         
         @media (max-width: 768px) {
           opacity: 1;
@@ -339,7 +337,7 @@
 
     .hljs-string,
     .hljs-attribute {
-      color: $green-color;
+      color: var(--green-color);
     }
 
     .code-header {
@@ -413,7 +411,7 @@
       top: 8px;
       opacity: 0;
       visibility: hidden;
-      background-color: $add-bg-color;
+      background-color: var(--chat-assistent-bg-dark);
       border-radius: 16px;
 
       @media (max-width: 768px) {

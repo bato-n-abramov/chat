@@ -1,5 +1,3 @@
-@import '../../styles/variables';
-
 .sidebar {
     overflow: hidden;
     padding: 18px 0 0;
@@ -265,7 +263,7 @@
  
 
         &.btn {
-            background-color: $green-color;
+            background-color: var(--green-color);
             color: #151617;
         }
     }

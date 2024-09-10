@@ -1,5 +1,3 @@
-@import '../../../styles/variables';
-
 .btn {
     display: flex;
     align-items: center;
@@ -10,7 +8,7 @@
     box-sizing: border-box;
   
     &.btn-primary {
-      background-color: $green-color;
+      background-color: var(--green--color);
       color: white;
   
       &:hover {
@@ -19,7 +17,7 @@
     }
   
     &.btn-secondary {
-      background-color: $add-bg-color;
+      background-color: var(--chat-assistent-bg-dark);
       color: white;
   
       &:hover {
@@ -32,7 +30,7 @@
     }
   
     &:disabled {
-      background-color: $bg-color;
+      background-color: var(--dark);
       cursor: not-allowed;
     }
   }
