@@ -14,12 +14,12 @@ const Dropdown = () => {
                     <Arrow />
                 </div>
             </DropdownMenu.Trigger>
-            <DropdownMenu.Content>
+            {/* <DropdownMenu.Content>
                 <DropdownMenu.Item shortcut="⌘ E">Edit</DropdownMenu.Item>
                 <DropdownMenu.Item shortcut="⌘ D">Duplicate</DropdownMenu.Item>
                 <DropdownMenu.Separator />
                 <DropdownMenu.Item shortcut="⌘ N">Archive</DropdownMenu.Item>
-            </DropdownMenu.Content>
+            </DropdownMenu.Content> */}
         </DropdownMenu.Root>
 
     )
