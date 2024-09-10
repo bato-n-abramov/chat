@@ -184,6 +184,11 @@
         visibility: hidden;
         border-radius: 10px;
         background-color: var(--chat-assistent-bg-dark);
+        transition: 0.3s;
+
+        &:hover {
+          background-color: var(--chat-user-bg-light);
+        }
         
         @media (max-width: 768px) {
           opacity: 1;
@@ -393,13 +398,6 @@
       width: 100%;
     }
 
-    &:hover {
-      .assistant-image-download {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-
     &-download {
       width: 48px;
       height: 48px;
@@ -437,9 +435,18 @@
   background-color: var(--chat-user-bg-dark);
   cursor: pointer;
   pointer-events: auto;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: var(--chat-user-bg-light);
+  }
 
   .light & {
     background-color: var(--white);
+
+    &:hover {
+      background-color: var(--dark);
+    }
 
     svg {
       path {
