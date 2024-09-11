@@ -113,6 +113,21 @@
       }
     }
 
+    button {
+      &.active {
+        .like {
+          path {
+            stroke: var(--green-color);
+          }
+        }
+        .dislike {
+          path {
+            stroke: #CF4021;
+          }
+        }
+      }
+    }
+
     .like:hover {
       path {
         stroke: var(--green-color);
