@@ -192,10 +192,10 @@ function ChatMessage({ message }) {
                         <div className="chat-message-assistant-btn chat-message-assistant-copy">Copy</div>
                         <div className="chat-message-assistant-btn chat-message-assistant-regenerate">Regenerate response</div>
                         <div className="chat-message-assistant-btn chat-message-assistant-reactions">
-                          <Button onClick={handleLike} className={like ? 'active' : ''}>
+                          <Button onClick={handleLike} className={`btn-transparent ${like ? 'active' : ''}`}>
                             <Like />
                           </Button>
-                         <Button onClick={handleDislike} className={dislike ? 'active' : ''}>
+                         <Button onClick={handleDislike} className={`btn-transparent ${dislike ? 'active' : ''}`}>
                             <Dislike  />
                          </Button>
                         </div>
